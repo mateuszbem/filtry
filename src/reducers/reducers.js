@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import filtry from './filtry'
+import filtr from './filters'
  
 const Reducers = combineReducers({
-    filtry
+    filtr
 });
 export default Reducers;

@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import {createStore} from 'redux'
+import {createStore,applyMiddleware} from 'redux'
 import Reducers from './reducers/reducers';
-import {App} from './components/app';
+import App from './containers/app';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
+// import promiseMiddleware from 'redux-promise';
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
-const store =  createStore(Reducers);
-
+const middleWare = applyMiddleware(thunk);
+const store =  createStore(Reducers,middleWare);
 
 ReactDOM.render(
     <Provider store={store}>
