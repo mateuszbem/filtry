@@ -135,7 +135,7 @@ class App extends React.Component {
                   select.map((item,key)=>{
                   const colors_array =  (_.values(_.invert(item.color))).map((x)=>x);
                   
-                  function price(color){
+                  function price(color,e){
                     const price = item.color;
                     
                     var y = (Object.entries(price)).map((x)=>{
@@ -153,7 +153,7 @@ class App extends React.Component {
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text">{item.category.toUpperCase()}</p>
                       <p className="card-text">{item.price}</p>
-                      <p className="card-text">{colors_array.map((colo)=><span onClick={()=> {price(colo)}} style={{backgroundColor: colo,margin:2,borderRadius:20,border:'1px solid',padding:'0 5% 0 5%'}}></span>)}</p>
+                      <p className="card-text">{colors_array.map((colo)=><span onClick={(e)=> {price(colo,e)}} style={{backgroundColor: colo,margin:2,borderRadius:20,border:'1px solid',padding:'0 5% 0 5%'}}></span>)}</p>
                       </div>
                     </div>
                     </div>
