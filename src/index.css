@@ -27,3 +27,6 @@ body {
       column-count: 5 !important;
   }
 }
+.card-columns {
+  column-count: 4;
+}
