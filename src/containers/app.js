@@ -5,7 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash'
-import {dane,setcategories,setcolors,setfiltered} from '../actions/actions'
+import {dane,setcategories,setcolors,setfiltered,setprice} from '../actions/actions'
 
 const styles = {
     columnCount: 4
@@ -18,17 +18,13 @@ class App extends React.Component {
         color: [],
         categ: [],
         prod: [],
-        filters: []
+        filters: [],
+        price:[]
       }
     }
     componentDidMount(){
       this.props.dane();
-      
-      //this.props.setcategories(); oczekuje parametru
     }
-    // componentWillUpdate(nextProps, nextState){
-    //   console.log(nextProps,nextState)
-    // }
     handleColorChange = (event, index, values) => {
       this.props.setcolors(values);
       this.props.setfiltered(this.props.categories,values);
@@ -37,7 +33,10 @@ class App extends React.Component {
       this.props.setcategories(values);
       this.props.setfiltered(values,this.props.colors);
     }
-
+    handlePrice = (colo,item)=>{
+      this.setState({price: 'x'})
+      this.props.setprice(colo,item)
+    }
     categoriesRender = (values) => {
       switch (values.length) {
         case 0:
@@ -54,7 +53,6 @@ class App extends React.Component {
           return "COLOR"
       }
     }
-
     categoryItems(items) {
     return items.map((item) => (
       <MenuItem
@@ -85,7 +83,6 @@ class App extends React.Component {
       const colors = _.union.apply(null,this.props.data.map((value,key)=>{
         return _.values(_.invert((value.color)))
       }));
-      
       const orderedcolors = _.orderBy(colors,[],['asc']);
 
       if(this.props.colors.length>0&&this.props.categories.length>0&&this.props.filtered.length==0){
@@ -134,17 +131,6 @@ class App extends React.Component {
                 {
                   select.map((item,key)=>{
                   const colors_array =  (_.values(_.invert(item.color))).map((x)=>x);
-                  
-                  function price(color,e){
-                    const price = item.color;
-                    
-                    var y = (Object.entries(price)).map((x)=>{
-                      if(x[0]==color){
-                        return x[1]
-                      }
-                    })
-                    console.log(_.compact(y)[0])
-                  }
                   return (
                     <div className="col-sm-12 col-md-4" style={{marginBottom:'2%',paddingLeft:0,paddingRight:0}}>
                     <div className="card text-center">
@@ -153,7 +139,7 @@ class App extends React.Component {
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text">{item.category.toUpperCase()}</p>
                       <p className="card-text">{item.price}</p>
-                      <p className="card-text">{colors_array.map((colo)=><span onClick={(e)=> {price(colo,e)}} style={{backgroundColor: colo,margin:2,borderRadius:20,border:'1px solid',padding:'0 5% 0 5%'}}></span>)}</p>
+                      <p className="card-text">{colors_array.map((colo)=><span onClick={(e)=> {this.handlePrice(colo,item)}} style={{backgroundColor: colo,margin:2,borderRadius:20,border:'1px solid',padding:'0 5% 0 5%'}}></span>)}</p>
                       </div>
                     </div>
                     </div>
@@ -174,7 +160,8 @@ function mapStateToProps(state){
     data : state.filtr.data,
     categories: state.filtr.categories,
     colors: state.filtr.colors,
-    filtered: state.filtr.filtered
+    filtered: state.filtr.filtered,
+    price: state.filtr.price
   }
 }
 
@@ -183,7 +170,8 @@ function mapDispatchToProps(dispatch){
     dane:dane,
     setcategories:setcategories,
     setcolors:setcolors,
-    setfiltered:setfiltered
+    setfiltered:setfiltered,
+    setprice: setprice
   },dispatch)
 }
 export default connect(mapStateToProps,mapDispatchToProps)(App);
