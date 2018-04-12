@@ -34,7 +34,7 @@ class App extends React.Component {
       this.props.setfiltered(values,this.props.colors);
     }
     handlePrice = (colo,item)=>{
-      this.setState({price: 'x'})
+      this.setState({price: colo})
       this.props.setprice(colo,item)
     }
     categoriesRender = (values) => {
