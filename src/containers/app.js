@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash'
 import {dane,setcategories,setcolors,setfiltered,setprice} from '../actions/actions'
+import  ProductCard  from '../containers/product_card';
 
 const styles = {
     columnCount: 4
@@ -15,10 +16,6 @@ class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        color: [],
-        categ: [],
-        prod: [],
-        filters: [],
         price:[]
       }
     }
@@ -32,10 +29,6 @@ class App extends React.Component {
     handleCategoryChange = (event, index, values) => {
       this.props.setcategories(values);
       this.props.setfiltered(values,this.props.colors);
-    }
-    handlePrice = (colo,item)=>{
-      this.setState({price: colo})
-      this.props.setprice(colo,item)
     }
     categoriesRender = (values) => {
       switch (values.length) {
@@ -84,18 +77,7 @@ class App extends React.Component {
         return _.values(_.invert((value.color)))
       }));
       const orderedcolors = _.orderBy(colors,[],['asc']);
-
-      if(this.props.colors.length>0&&this.props.categories.length>0&&this.props.filtered.length==0){
-        var select = this.props.filtered
-      }
-      else if(this.props.filtered==0){
-        var select = this.props.data
-      }
-      else{
-        var select = this.props.filtered
-      }
       return(
-        
         <MuiThemeProvider>
           <div className="container">
             <div className="row"><br/></div>
@@ -127,24 +109,8 @@ class App extends React.Component {
             </div>
             <div className="row">
               <div className="col-md-12 col-lg-12">
-              <div class="card-deck" style={styles}>
-                {
-                  select.map((item,key)=>{
-                  const colors_array =  (_.values(_.invert(item.color))).map((x)=>x);
-                  return (
-                    <div className="col-sm-12 col-md-4" style={{marginBottom:'2%',paddingLeft:0,paddingRight:0}}>
-                    <div className="card text-center">
-                    <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Card image cap"/>
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <p className="card-text">{item.category.toUpperCase()}</p>
-                      <p className="card-text">{item.price}</p>
-                      <p className="card-text">{colors_array.map((colo)=><span onClick={(e)=> {this.handlePrice(colo,item)}} style={{backgroundColor: colo,margin:2,borderRadius:20,border:'1px solid',padding:'0 5% 0 5%'}}></span>)}</p>
-                      </div>
-                    </div>
-                    </div>
-                  )
-                })}
+                <div class="card-deck" style={styles}>
+                  <ProductCard/>
                 </div>
               </div>
             </div>
@@ -155,7 +121,6 @@ class App extends React.Component {
   };
                   
 function mapStateToProps(state){
-  //console.log(state.filtr);
   return{
     data : state.filtr.data,
     categories: state.filtr.categories,
@@ -164,7 +129,6 @@ function mapStateToProps(state){
     price: state.filtr.price
   }
 }
-
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     dane:dane,
