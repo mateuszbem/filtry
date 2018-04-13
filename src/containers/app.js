@@ -102,7 +102,7 @@ class App extends React.Component {
           <div className="container product_section_container">
             <div className="row"><br/></div>
             <div className="row">
-            <div className="col-md-2 col-lg-2">
+            <div className="col-md-3 col-lg-3">
                 <div className="row-fluid">
                   <h5>Categories</h5>
                   <SelectField
@@ -139,7 +139,7 @@ class App extends React.Component {
                 </div>
                 
               </div>
-              <div className="col-md-10 col-lg-10">
+              <div className="col-md-9 col-lg-9">
                 <div class="card-deck" style={columns}>
                   <ProductCard/>
                 </div>
