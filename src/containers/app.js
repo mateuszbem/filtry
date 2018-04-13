@@ -17,7 +17,7 @@ const columns = {
 const styles = {
   customWidth: {
     width: '100%',
-    marginBottom: '15%'
+    marginBottom: '15px'
   },
 };
 
