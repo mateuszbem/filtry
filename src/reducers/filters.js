@@ -16,6 +16,8 @@ export default function filtr(state=initState,action){
             return{...state, categories: action.payload}
         case 'SET_COLORS': 
             return{...state, colors: action.payload}
+        case 'SET_SEARCH': 
+            return{...state, filtered: action.payload}
         case 'SET_PRICE': 
             return{...state}
         case 'SHOW_PRODUCTS_FILTERED':

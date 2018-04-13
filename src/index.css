@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 20;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 @media (min-width: 576px) {

@@ -3,20 +3,30 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash'
-import {dane,setcategories,setcolors,setfiltered,setprice} from '../actions/actions'
+import {dane,setcategories,setcolors,setfiltered,setprice,setsearch} from '../actions/actions'
 import  ProductCard  from '../containers/product_card';
+import TopBar from '../components/topbar';
+import LeftBar from '../components/leftbar';
 
-const styles = {
+const columns = {
     columnCount: 4
 }
+const styles = {
+  customWidth: {
+    width: '100%',
+    marginBottom: '15%'
+  },
+};
 
 class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        price:[]
+        price:[],
+        search: []
       }
     }
     componentDidMount(){
@@ -29,6 +39,12 @@ class App extends React.Component {
     handleCategoryChange = (event, index, values) => {
       this.props.setcategories(values);
       this.props.setfiltered(values,this.props.colors);
+    }
+    handleSearch = (event, index, values) => {
+      this.setState({
+        search: event.target.value
+      })
+      this.props.setsearch(event.target.value);
     }
     categoriesRender = (values) => {
       switch (values.length) {
@@ -79,22 +95,27 @@ class App extends React.Component {
       const orderedcolors = _.orderBy(colors,[],['asc']);
       return(
         <MuiThemeProvider>
-          <div className="container">
+
+
+        <TopBar/>
+          <div className="container-fluid">
             <div className="row"><br/></div>
             <div className="row">
-              <div className="col-md-4">
-                <SelectField
+            <div className="col-md-2 col-lg-2 offset-1">
+                <div className="row-fluid">
+                  <h5>Categories</h5>
+                  <SelectField
                   id="selectfield"
                   multiple={true}
                   hintText="CATEGORY"
                   value={this.props.categories}
                   onChange={this.handleCategoryChange}
                   selectionRenderer={this.categoriesRender}
-                >
+                  style={styles.customWidth}
+                  >
                   {this.categoryItems(categ)}
                 </SelectField>
-              </div>
-              <div className="col-md-4">
+                <h5>Colors</h5>
                 <SelectField
                   id="selectfield2"
                   multiple={true}
@@ -102,19 +123,29 @@ class App extends React.Component {
                   value={this.props.colors}
                   onChange={this.handleColorChange}
                   selectionRenderer={this.colorsRender}
+                  style={styles.customWidth}
                 >
                   {this.colorItems(orderedcolors)}
                 </SelectField>
+
+                <h5>Search</h5>
+                <TextField
+                  hintText="Name of product"
+                  fullWidth={true}
+                  value={this.state.search}
+                  onChange={this.handleSearch}
+                />
+                </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-lg-12">
-                <div class="card-deck" style={styles}>
+              <div className="col-md-8 col-lg-8">
+                <div class="card-deck" style={columns}>
                   <ProductCard/>
                 </div>
               </div>
             </div>
           </div>
+
+          
         </MuiThemeProvider>
       );
     }
@@ -135,7 +166,8 @@ function mapDispatchToProps(dispatch){
     setcategories:setcategories,
     setcolors:setcolors,
     setfiltered:setfiltered,
-    setprice: setprice
+    setprice: setprice,
+    setsearch: setsearch
   },dispatch)
 }
 export default connect(mapStateToProps,mapDispatchToProps)(App);
