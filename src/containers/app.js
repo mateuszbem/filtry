@@ -10,7 +10,7 @@ import {dane,setcategories,setcolors,setfiltered,setprice,setsearch} from '../ac
 import  ProductCard  from '../containers/product_card';
 import TopBar from '../components/topbar';
 import LeftBar from '../components/leftbar';
-
+import Footer from '../components/footer';
 const columns = {
     columnCount: 4
 }
@@ -99,10 +99,10 @@ class App extends React.Component {
 
 
         <TopBar/>
-          <div className="container-fluid">
+          <div className="container product_section_container">
             <div className="row"><br/></div>
             <div className="row">
-            <div className="col-md-2 col-lg-2 offset-2">
+            <div className="col-md-2 col-lg-2">
                 <div className="row-fluid">
                   <h5>Categories</h5>
                   <SelectField
@@ -138,14 +138,14 @@ class App extends React.Component {
                 />
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6">
+              <div className="col-md-10 col-lg-10">
                 <div class="card-deck" style={columns}>
                   <ProductCard/>
                 </div>
               </div>
             </div>
           </div>
-
+        <Footer></Footer>
           
         </MuiThemeProvider>
       );
