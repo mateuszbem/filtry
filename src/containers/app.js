@@ -137,6 +137,7 @@ class App extends React.Component {
                   onChange={this.handleSearch}
                 />
                 </div>
+                
               </div>
               <div className="col-md-10 col-lg-10">
                 <div class="card-deck" style={columns}>
