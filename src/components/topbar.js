@@ -62,9 +62,6 @@ export default class TopBar extends React.Component{
                             <ul className="navbar_menu">
                                 <li><a href="index.html">home</a></li>
                                 <li><a href="#">shop</a></li>
-                                <li><a href="#">promotion</a></li>
-                                <li><a href="#">pages</a></li>
-                                <li><a href="#">blog</a></li>
                                 <li><a href="#">contact</a></li>
                             </ul>
                             <ul className="navbar_user">
@@ -77,9 +74,6 @@ export default class TopBar extends React.Component{
                                     </a>
                                 </li>
                             </ul>
-                            <div className="hamburger_container">
-                                <i className="fa fa-bars" aria-hidden="true"></i>
-                            </div>
                         </nav>
                     </div>
                 </div>
