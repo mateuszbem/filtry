@@ -41,6 +41,7 @@ class App extends React.Component {
       this.props.setfiltered(values,this.props.colors);
     }
     handleSearch = (event, index, values) => {
+      console.log(this.props.filtered)
       this.setState({
         search: event.target.value
       })
@@ -101,7 +102,7 @@ class App extends React.Component {
           <div className="container-fluid">
             <div className="row"><br/></div>
             <div className="row">
-            <div className="col-md-2 col-lg-2 offset-1">
+            <div className="col-md-2 col-lg-2 offset-2">
                 <div className="row-fluid">
                   <h5>Categories</h5>
                   <SelectField
@@ -137,7 +138,7 @@ class App extends React.Component {
                 />
                 </div>
               </div>
-              <div className="col-md-8 col-lg-8">
+              <div className="col-md-6 col-lg-6">
                 <div class="card-deck" style={columns}>
                   <ProductCard/>
                 </div>

@@ -21,11 +21,11 @@ export const setcolors = (values) =>{
     }
 }
 export const setsearch = (values) =>{
-    console.log(values)
+
     const search = products.filter((e)=>{
         return ((e.name.indexOf(values)!==-1)||(e.category.indexOf(values)!==-1))
     })
-    console.log(search)
+
     return{
         type: 'SET_SEARCH',
         payload: search
