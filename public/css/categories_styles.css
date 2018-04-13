@@ -1540,8 +1540,8 @@ section
 }
 .footer_nav_container
 {
-	height: 130px;
-
+	margin-bottom: 10px;
+	padding: 20px;
 }
 .cr
 {
@@ -1573,7 +1573,7 @@ section
 }
 .footer_social
 {
-	height: 130px;
+	padding: 20px
 }
 .footer_social ul li
 {

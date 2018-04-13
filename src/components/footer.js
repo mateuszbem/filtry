@@ -31,7 +31,7 @@ export default class Footer extends React.Component{
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="footer_nav_container">
-                            <div className="cr">©2018 All Rights Reserverd.<a href="#"> Bem</a></div>
+                            <div className="cr text-center">©2018 All Rights Reserverd.</div>
                         </div>
                     </div>
                 </div>
